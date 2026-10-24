@@ -26,6 +26,18 @@ class Carts(Base):
 class Cart_Items(Base):
     __tablename__ = 'cart_items'
 
-    cart_item_id = Column(Integer, nullable=False, primary_key=True)
+    id = Column(Integer, nullable=False, primary_key=True)
+    cart_id = Column(Integer, ForeignKey("carts.id"))
+    product_id = Column(Integer, ForeignKey("products.product_id", ondelete="CASCADE"))
     quantity = Column(Integer, nullable=False)
-    
+
+class Orders(Base):
+    __tablename__ = "orders"
+
+    id = Column(Integer, nullable=False, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"))
+    total_amount = Column(Integer, nullable=True)
+    status = Column(String, nullable=False)
+
+class Order_Items(Base):
+    pass
