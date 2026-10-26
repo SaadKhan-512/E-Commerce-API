@@ -40,4 +40,11 @@ class Orders(Base):
     status = Column(String, nullable=False)
 
 class Order_Items(Base):
-    pass
+    __tablename__ = "order_items"
+    id = Column(Integer, nullable=False, primary_key=True)
+    order_id = Column(Integer, ForeignKey("orders.id"))
+
+    product_id = Column(Integer, ForeignKey("products.product_id", ondelete="CASCADE"))
+    quantity = Column(Integer, nullable=False)
+
+    price_at_purchase = Column(Integer, nullable=False)
