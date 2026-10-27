@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from database import database, models
 import schemas
 
-router = APIRouter(prefix="/products")
+router = APIRouter(prefix="/products", tags=["CRUD"])
 
 # Get all products
 @router.get("", response_model=list[schemas.Product_Response])
@@ -42,3 +42,21 @@ def update_product(updated_product: schemas.Update_Product, db: Session = Depend
     db.commit()
 
     return {"message": "Product updated successfully."}
+
+# Deleting a product
+@router.delete("")
+def delete(id: int, db: Session = Depends(database.get_db)):
+    product = db.query(models.Product).filter(models.Product.product_id == id).first()
+
+    # If product was not found:
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, 
+            detail=f"Product with id of {id} was not found in database."
+        )
+    
+    # Else delete that product
+    db.delete(product)
+    db.commit()
+
+    return {"message": f"Product with id of {id} has been deleted successfully."}
