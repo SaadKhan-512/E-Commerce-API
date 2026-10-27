@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 ## Schemas
 
@@ -23,3 +23,13 @@ class Update_Product(BaseModel):
     name: str
     price: int
     stock_quantity: int
+
+# For creating a user
+class User_Create(BaseModel):
+    username: EmailStr
+    password: str
+
+# For login
+class Login_credentials(BaseModel):
+    email: EmailStr
+    password: str
