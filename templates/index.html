@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+     {% for product in products %}
+        <div>
+            <h2>{{ product.name }}</h2>
+            <p>Product ID: {{ product.id }}</p>
+            <p>Price: Rs. {{ product.price }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>
