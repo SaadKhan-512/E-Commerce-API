@@ -1,0 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 30px;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #1e293b;
+    margin-bottom: 35px;
+}
+
+.product {
+    background-color: white;
+    max-width: 500px;
+    margin: 15px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.product h2 {
+    color: #2563eb;
+    margin-top: 0;
+}
+
+.product p {
+    color: #555;
+    font-size: 15px;
+    margin: 10px 0;
+}
