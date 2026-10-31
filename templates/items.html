@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/items.css') }}">
+    <title>Items</title>
+</head>
+<body>
+    <h1>Items</h1>
+
+    {% for product in products %}
+        <div class="product">
+            <h2>{{ product.name }}</h2>
+            <p>Product ID: {{ product.id }}</p>
+            <p>Price: Rs. {{ product.price }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Request, Form
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from pathlib import Path
@@ -15,15 +15,55 @@ templates = Jinja2Templates(
 # main app
 router = APIRouter(tags=["CRUD"])
 
-
+# Dashboard
 @router.get("/dashboard")
 def dashboard(request: Request, db: Session = Depends(database.get_db)):
     products = db.query(models.Product).order_by(models.Product.product_id).all()
 
     return templates.TemplateResponse(
         request=request,
-        name="index.html",
+        name="admin_roles.html",
         context={"name": "Saad", "products": products}
+    )
+
+# Get items
+@router.get("/items")
+def get_items(request: Request, db: Session = Depends(database.get_db)):
+    products = db.query(models.Product).order_by(models.Product.product_id).all()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="items.html",
+        context={"name": "Saad", "products": products}
+    )
+
+# Add item
+# Load File:
+@router.get("/items/add")
+def add_item_page(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="add_item.html",
+        context={}
+    )
+
+# 
+@router.post("/items/add")
+def add_item(
+    request: Request, 
+    db: Session = Depends(database.get_db),
+    name: str = Form(...),
+    price: float = Form(...),
+    stock: int = Form(...)):
+
+    obj = models.Product(**{"name": name, "price": price, "stock_quantity": stock})
+    db.add(obj)
+    db.commit()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="add_item.html",
+        context={"products": "products"}
     )
 
 # # Get all products

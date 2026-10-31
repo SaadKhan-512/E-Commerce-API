@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='/add_item.css') }}">
+    <title>Add Item</title>
+</head>
+<body>
+    <form action="/items/add" method="post">
+
+        <label>Item Name:</label>
+        <input type="text" name="name" placeholder="Enter item name" required>
+
+        <label>Price:</label>
+        <input type="number" name="price" placeholder="Enter price" step="0.01" required>
+
+        <label>Stock Quantity:</label>
+        <input type="number" name="stock" placeholder="Enter stock quantity" min="0" required>
+
+        <button type="submit">Add Item</button>
+
+    </form>
+</body>
+</html>
